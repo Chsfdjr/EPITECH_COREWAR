@@ -1,0 +1,9 @@
+./asm/asm:1: MAJOR:C-O1
+./asm/vgcore.15983:1: MAJOR:C-O1
+./asm/vgcore.5142:1: MAJOR:C-O1
+./asm/vgcore.5273:1: MAJOR:C-O1
+./corewar/corewar:1: MAJOR:C-O1
+./lib/libmy.a:1: MAJOR:C-O1
+./lib/my/libmy.a:1: MAJOR:C-O1
+./lib/my/printf/libpf.a:1: MAJOR:C-O1
+./vgcore.10443:1: MAJOR:C-O1

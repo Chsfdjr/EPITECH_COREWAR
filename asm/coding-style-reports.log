@@ -1,0 +1,16 @@
+./asm:1: MAJOR:C-O1
+./asm_handling_functions_before_write.c:26: MINOR:C-L3
+./asm_handling_functions_before_write.c:30: MINOR:C-L3
+./asm_handling_functions_before_write.c:32: MINOR:C-L3
+./asm_handling_functions_before_write.c:46: MAJOR:C-F4
+./asm_handling_functions_before_write.c:47: MAJOR:C-F4
+./asm_write_file.c:14: MAJOR:C-C1
+./asm_write_file.c:16: MINOR:C-L3
+./asm_write_file.c:19: MAJOR:C-C1
+./asm_write_file.c:22: MAJOR:C-C1
+./asm_write_file.c:25: MAJOR:C-C1
+./vgcore.15983:1: MAJOR:C-O1
+./vgcore.19333:1: MAJOR:C-O1
+./vgcore.20289:1: MAJOR:C-O1
+./vgcore.5142:1: MAJOR:C-O1
+./vgcore.5273:1: MAJOR:C-O1

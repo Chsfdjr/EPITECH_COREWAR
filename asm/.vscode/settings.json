@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "system_error": "c",
+        "corewar_asm.h": "c",
+        "op.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c"
+    }
+}

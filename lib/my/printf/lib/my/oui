@@ -1,0 +1,641 @@
+/*
+** EPITECH PROJECT, 2022
+** getstr_non_char
+** File description:
+** get str without char at the end
+*/
+int my_strlen(char *str);
+
+int getstr_non_char(char *nb, char not)
+{
+    int index = my_strlen(nb) - 1;
+    while (nb[index] == not)
+        index -= 1;
+    return index + 1;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_compute_power_rec.c
+** File description:
+** task04 d5
+*/
+
+int my_compute_power_it(int nb, int c);
+
+int my_compute_power_rec(int nb, int c)
+{
+    int res;
+    long temp = nb;
+
+    if (c < 0) {
+        return 0;
+    }
+    if (c == 0) {
+        return 1;
+    }
+    temp = temp * my_compute_power_rec(temp, c - 1);
+    if (temp <= -2147483648 || temp >= 2147483647) {
+        return 0;
+    }
+    res = temp;
+    return res;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_getnbr_base.c
+** File description:
+** task19 day06
+*/
+
+int my_strlen(char const *str);
+int my_getsign(char const *str, int ind_deb);
+
+int my_ideb(char const *str, char const *base)
+{
+    int len = my_strlen(str);
+
+    for (int i = 0; i < len; i ++) {
+        if (base[0] <= str[i] && str[i] <= base[my_strlen(base) - 1])
+            return i;
+    }
+    return len;
+}
+
+int my_ifin(char const *str, int i_deb, char const *base)
+{
+    int i_fin = i_deb;
+
+    while (base[0] <= str[i_fin] && str[i_fin] <= base[my_strlen(base) - 1])
+        i_fin ++;
+    i_fin --;
+    return i_fin;
+}
+
+int long_to_int(long nbr1)
+{
+    int nbr = 0;
+
+    if (!(nbr1 < -2147483648 || nbr1 > 214483647))
+        nbr += nbr1;
+    return nbr;
+}
+
+int recup_val(char c, char const *base)
+{
+    for (int nbr = 0; nbr < my_strlen(base); nbr ++) {
+        if (base[nbr] == c)
+            return nbr;
+    }
+}
+
+int my_getnbr_base(char const *str, char const *base)
+{
+    int i_deb = my_ideb(str, base);
+    int i_fin = my_ifin(str, i_deb, base);
+    long temp_nbr = 0;
+    int pow = 1;
+    int i = i_deb;
+
+    if (i_deb == my_strlen(str))
+        return 0;
+    for (int i = i_deb; i < i_fin; i ++)
+        pow *= my_strlen(base);
+    for (; pow >= 1; pow /= my_strlen(base)) {
+        temp_nbr += recup_val(str[i_deb], base) * pow;
+        i_deb += 1;
+    }
+    temp_nbr *= my_getsign(str, i);
+    return (long_to_int(temp_nbr));
+}
+/*
+** EPITECH PROJECT, 2022
+** my_getnbr.c
+** File description:
+** task05
+*/
+
+int my_strlen(char const *str);
+int my_getsign(char const *str, int ind_deb);
+
+int my_ind_deb(char const *str)
+{
+    int len = my_strlen(str);
+    int index = 0;
+
+    for (; index < len; index ++) {
+        if ('0' <= str[index] && str[index] <= '9') {
+            return (index);
+        }
+    }
+    return (len);
+}
+
+int my_ind_fin(char const *str, int ind_deb)
+{
+    int ind_fin;
+
+    ind_fin = ind_deb;
+    while ('0' <= str[ind_fin] && str[ind_fin] <= '9') {
+        ind_fin ++;
+    }
+    ind_fin --;
+    return (ind_fin);
+}
+
+int long_into_int(long nbr1)
+{
+    int nbr = 0;
+
+    if (nbr1 < -2147483648 || nbr1 > 2147483647) {
+        nbr = 0;
+    } else {
+        nbr += nbr1;
+    }
+    return nbr;
+}
+
+int get_mult(int ind_deb, int ind_fin)
+{
+    int i;
+    int mult = 1;
+
+    for (i = ind_deb; i < ind_fin; i ++) {
+        mult *= 10;
+    }
+    return mult;
+}
+
+int my_getnbr(char const *str)
+{
+    int ind_deb = my_ind_deb(str);
+    int ind_fin = my_ind_fin(str, ind_deb);
+    long temp_nbr = 0;
+    int mult;
+    int sign;
+    int i = ind_deb;
+
+    if (ind_deb == my_strlen(str)) {
+        return (0);
+    }
+    mult = get_mult(ind_deb, ind_fin);
+    for (; mult >= 1; mult /= 10) {
+        temp_nbr += (str[ind_deb] - 48)*mult;
+        ind_deb ++;
+    }
+    temp_nbr *= my_getsign(str, i);
+    return (long_into_int(temp_nbr));
+}
+/*
+** EPITECH PROJECT, 2022
+** my_getsign.c
+** File description:
+** task05 day04
+*/
+
+#include <stdio.h>
+
+int my_getsign(char const *str, int ind_deb)
+{
+    int nbr = 1;
+
+    while (ind_deb >= 1) {
+        if (str[ind_deb - 1] == '-') {
+            nbr *= -1;
+        }
+        if (str[ind_deb - 1] != '+' && str[ind_deb - 1] != '-') {
+            return nbr;
+        }
+        ind_deb -= 1;
+    }
+    return nbr;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_putchar.c
+** File description:
+** function my_putchar
+*/
+
+#include <unistd.h>
+
+void my_putchar(char c)
+{
+    write(1, &c, 1);
+}
+/*
+** EPITECH PROJECT, 2022
+** my_put_nbr_base2
+** File description:
+** put float in base n
+*/
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int my_strlen(char const *str);
+char *my_revstr(char *str);
+int my_putstr(char const *str);
+char my_putchar(char c);
+int recup_div(long nbr, int div_base);
+char *my_strcat(char *dest, char const *src);
+int my_compute_power_rec(int nb, int c);
+char *my_str_round(char *str, char const *base, int prs);
+
+double neg_power_rec(int nb, int c)
+{
+    if (c >= 0)
+        return my_compute_power_rec(nb,c);
+    return (1. / my_compute_power_rec(nb, -c));
+}
+
+char *my_putint_base(double nb, char const *base)
+{
+    int nbr = nb;
+    int div_base = my_strlen(base);
+    int len_str = recup_div(nbr, div_base);
+    char *str = malloc(sizeof(char) * len_str + 1);
+    int i = 0;
+
+    if (nbr < 0) {
+        nbr *= -1;
+        str[len_str - 1] = '-';
+    }
+    for (; nbr >= 1; nbr /= div_base) {
+        str[i] = base[nbr % div_base];
+        i ++;
+    }
+    str[i] = '\0';
+    my_revstr(str);
+    return str;
+}
+
+char *my_putdec_base(double nbr, char const *base, int prs)
+{
+    char *str;
+    int p = 0;
+    double a = 0;
+    int i = 1;
+    str = malloc(sizeof(char) * (prs + 1) +1);
+    str[0] = '.';
+    nbr -= (int)nbr;
+    if (0 > nbr)
+        nbr *= -1;
+    for (i = 1; i != prs + 1; i++) {
+        for (p = 1; nbr >= (neg_power_rec(my_strlen(base), -i) * p); p++);
+        str[i] = base[p - 1];
+        nbr -= (neg_power_rec(my_strlen(base), -i) * (p - 1));
+        p = 0;
+    }
+    str[i] = '\0';
+    return (my_str_round(str,base,prs));
+}
+
+char *my_putfloat_base(double nb, char const *base, int prs)
+{
+    char *str = my_putint_base(nb,base);
+    char *str2 = my_putdec_base(nb,base,prs);
+    if (nb != (int)nb)
+        my_strcat(str,str2);
+    free(str2);
+    str2 = NULL;
+    return str;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_putnbr_base.c
+** File description:
+** task18 day06
+*/
+
+#include <unistd.h>
+#include <stdlib.h>
+
+int my_strlen(char const *str);
+char *my_revstr(char *str);
+int my_putstr(char const *str);
+char my_putchar(char c);
+
+int recup_div(long nbr, int div_base)
+{
+    int div = 0;
+
+    if (nbr < 0)
+        nbr *= -1;
+    while (nbr >= 1) {
+        nbr /= div_base;
+        div += 1;
+    }
+    return div;
+}
+
+char *my_putnbr_base(long nbr, char const *base)
+{
+    int div_base = my_strlen(base);
+    int len_str = recup_div(nbr, div_base) + 1;
+    char *str = malloc(sizeof(char) * len_str + 1);
+    int i = 0;
+
+    if (nbr < 0)
+        nbr *= -1;
+    for (int i = 0; i < len_str; i ++)
+        str[i] = 0;
+    for (; nbr >= 1; nbr /= div_base) {
+        str[i] = base[nbr % div_base];
+        i ++;
+    }
+    str[len_str] = '\0';
+    my_revstr(str);
+    return str;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_put_nbr.c
+** File description:
+** task07
+*/
+
+void my_putchar(char c);
+
+int find_div(long nb)
+{
+    int pow = 0;
+
+    if (nb < 0) {
+        nb *= -1;
+    }
+    while (nb >= 1) {
+        nb /= 10;
+        pow += 1;
+    }
+    return pow;
+}
+
+void cas_xtrm(long nb)
+{
+    my_putchar('-');
+    my_putchar('2');
+    my_putchar('1');
+    my_putchar('4');
+    my_putchar('7');
+    my_putchar('4');
+    my_putchar('8');
+    my_putchar('3');
+    my_putchar('6');
+    my_putchar('4');
+    my_putchar('8');
+}
+
+int my_put_nbr(long nb)
+{
+    long n_prov;
+    int div = 1;
+    int compteur;
+
+    if (nb == -2147483648) {
+        cas_xtrm(nb);
+        return (0);
+    }
+    if (nb < 0) {
+        my_putchar('-');
+        nb = nb * -1;
+    }
+    compteur = find_div(nb);
+    for (compteur; compteur > 1; compteur -= 1)
+        div *= 10;
+    for (div; div > 0; div /= 10) {
+        my_putchar(48 + nb / div);
+        nb = nb % div;
+    }
+    return 0;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_putnstr.c
+** File description:
+** fonctions pr print les n premiers char
+*/
+
+#include <unistd.h>
+
+int my_strlen(char const *str);
+
+int my_putnstr(char const *str, int nb)
+{
+    int len = (nb < my_strlen(str)) ? nb : my_strlen(str);
+
+    write(1, str, len);
+    return len;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_putstr.c
+** File description:
+** task02
+*/
+
+#include <unistd.h>
+
+int my_strlen(char const *str);
+
+int my_putstr(char const *str)
+{
+    int len = my_strlen(str);
+
+    write(1, str, len);
+    return (0);
+}
+/*
+** EPITECH PROJECT, 2022
+** my_revstr.c
+** File description:
+** task03 day06
+*/
+
+int my_strlen(char const *str);
+
+char *my_revstr(char *str)
+{
+    int n = my_strlen(str);
+    int i_deb = 0;
+    int i_fin = n - 1;
+    char prov;
+
+    while (i_deb < n / 2) {
+        prov = str[i_deb];
+        str[i_deb] = str[i_fin];
+        str[i_fin] = prov;
+        i_deb += 1;
+        i_fin -= 1;
+    }
+    return str;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_showstr.c
+** File description:
+** task20 day06
+*/
+
+#include <stdlib.h>
+
+int my_strlen(char const *str);
+int my_str_isprintable(char const *str);
+void my_putchar(char c);
+int my_putstr(char const *str);
+char *my_putnbr_base(int nbr, char const *base);
+
+int char_isprint(char c)
+{
+    if (!(c >= 32 && c <= 126))
+        return 0;
+    return 1;
+}
+
+int my_printstr(char c)
+{
+    char *nb_hexa = malloc(sizeof(char) * 3);
+
+    if (char_isprint(c) == 0) {
+        my_putchar('\\');
+        nb_hexa = my_putnbr_base(c, "0123456789abcdef");
+        if (my_strlen(nb_hexa) == 1)
+            my_putchar('0');
+        my_putstr(nb_hexa);
+    } else {
+        my_putchar(c);
+    }
+    return 0;
+}
+
+int my_showstr(char const *str)
+{
+    for (int i = 0; i < my_strlen(str); i ++)
+        my_printstr(str[i]);
+    return 0;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_strcat.c
+** File description:
+** task02 day07
+*/
+
+int my_strlen(char const *str);
+
+char *my_strcat(char *dest, char const *src)
+{
+    int i = 0;
+
+    while (dest[i] != '\0')
+        i ++;
+    for (int j = 0; j < my_strlen(src); j++)
+        dest[i + j] = src[j];
+    return dest;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_strdup.c
+** File description:
+** task01 day08
+*/
+
+#include <stdlib.h>
+
+int my_strlen(char const *str);
+
+char *my_strdup(char const *src)
+{
+    int len = my_strlen(src);
+    char *str = malloc(sizeof(char) * (len + 1));
+
+    for (int i = 0; i < len + 1; i ++)
+        str[i] = src[i];
+    return str;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_strlen.c
+** File description:
+** task03
+*/
+
+#include <stdlib.h>
+
+int my_strlen(char const *str)
+{
+    int nb = 0;
+
+    while (str[nb] != '\0')
+        nb ++;
+    return (nb);
+}
+/*
+** EPITECH PROJECT, 2022
+** my_strncpy.c
+** File description:
+** task02 day6 copy n
+*/
+
+int my_strlen(char const *str);
+
+char *my_strncpy(char *dest, char const *src, int n)
+{
+    int len_source = my_strlen(src);
+    int len_dest = n;
+    int test = 0;
+
+    if (n > len_source) {
+        n = len_source;
+        test = 1;
+    }
+    for (int i = 0; i < n; i ++)
+        dest[i] = src[i];
+    if (test == 1)
+        dest[n] = '\0';
+    return dest;
+}
+/*
+** EPITECH PROJECT, 2022
+** my_str_round
+** File description:
+** round str
+*/
+#include <stdio.h>
+
+int my_strlen(char const *str);
+
+int first_occ(char *str, char c)
+{
+    int i = 0;
+    for (; str[i] != '\0'; i++)
+        if (str[i] == c)
+            return i;
+    return 84;
+}
+
+char *my_str_round(char *str, char *base,int prs)
+{
+    int i = prs;
+    int midbase = my_strlen(base) / 2;
+    if (first_occ(base,str[i]) >= first_occ(base,base[midbase])) {
+        for (;str[i] == base[my_strlen(base) - 1];i--)
+            str[i] = base[0];
+        str[i - 1] = str[i - 1] + 1;
+    }
+    str[prs] = '\0';
+    return str;
+}
+/*
+** EPITECH PROJECT, 2022
+** nb_diz
+** File description:
+** nb diz
+*/
+
+int nb_diz(int nbr)
+{
+    int a = 2;
+    for (; nbr >= 100;a++)
+        nbr /= 10;
+    return a;
+}
